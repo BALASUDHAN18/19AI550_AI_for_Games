@@ -1,33 +1,77 @@
-# Ex.No: 10  Implementation of Negamax Search
-### DATE:                                                                            
-### REGISTER NUMBER : 
+# Ex.No: 2 Implementation of Stack Plate game using Queue 
+### DATE:                                                              
+### REGISTER NUMBER : 212222240017
 ### AIM: 
-Write a Nega-max search algorithm to find the root value of Player from the  graph.
+To write a python program to simulate the process of stacking plates.
 ### Algorithm:
-1. Start the program
-2. import the math package
-3. Specify the score value of leaf nodes and find the depth of binary tree from leaf nodes.
-4. Define the minimax function
-5. If maximum depth is reached then get the score value of leaf node.
-6. Every level, score is evaluated by negamax function 
-8. Call the negamax function  and print the optimum value of Max player.
-9. Stop the program. 
-
+1. Initialize the Stack
+2. Create an empty list to represent the stack.
+3. Push the plate on top of stack
+4. Pop the plate from top.
+5. Display the plate details.
+6. Create an interactive menu and display it.
 ### Program:
+```python
+class PlateStack:
+    def __init__(self):
+        self.stack = []
 
+    def is_empty(self):
+        return len(self.stack) == 0
 
+    def push(self, plate):
+        self.stack.append(plate)
+        print(f"Plate '{plate}' added to the stack.")
 
+    def pop(self):
+        if self.is_empty():
+            print("The stack is empty. No plates to remove.")
+        else:
+            removed_plate = self.stack.pop()
+            print(f"Plate '{removed_plate}' removed from the stack.")
 
+    def view_stack(self):
+        if self.is_empty():
+            print("The stack is empty.")
+        else:
+            print("Current stack of plates:")
+            for plate in reversed(self.stack):
+                print(plate)
 
+def plate_stack_game():
+    plate_stack = PlateStack()
+    print("Welcome to the Plate Stack Game!")
 
+    while True:
+        print("\nChoose an option:")
+        print("1. Add a plate")
+        print("2. Remove a plate")
+        print("3. View stack")
+        print("4. Exit")
 
+        choice = input("Enter your choice: ")
 
+        if choice == '1':
+            plate = input("Enter the name of the plate to add: ")
+            plate_stack.push(plate)
+        elif choice == '2':
+            plate_stack.pop()
+        elif choice == '3':
+            plate_stack.view_stack()
+        elif choice == '4':
+            print("Exiting the game. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
-
+if __name__ == "__main__":
+    plate_stack_game()
+```
 
 ### Output:
+![Screenshot 2024-08-11 133752](https://github.com/user-attachments/assets/4023310e-4b1c-4247-b0e7-38441363b177)
 
 
 
 ### Result:
-Thus the root value of player was found using negamax search.
+Thus the simple Stack plate game was implemented using data structure Stack.
