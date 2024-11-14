@@ -1,77 +1,62 @@
-# Ex.No: 2 Implementation of Stack Plate game using Queue 
-### DATE:                                                              
-### REGISTER NUMBER : 212222240017
-### AIM: 
-To write a python program to simulate the process of stacking plates.
-### Algorithm:
-1. Initialize the Stack
-2. Create an empty list to represent the stack.
-3. Push the plate on top of stack
-4. Pop the plate from top.
-5. Display the plate details.
-6. Create an interactive menu and display it.
-### Program:
-```python
-class PlateStack:
-    def __init__(self):
-        self.stack = []
+# Ex.No: 10 Implementation of Negamax algorithm 
 
-    def is_empty(self):
-        return len(self.stack) == 0
+DATE:
 
-    def push(self, plate):
-        self.stack.append(plate)
-        print(f"Plate '{plate}' added to the stack.")
+REGISTER NUMBER : 212222240017
 
-    def pop(self):
-        if self.is_empty():
-            print("The stack is empty. No plates to remove.")
-        else:
-            removed_plate = self.stack.pop()
-            print(f"Plate '{removed_plate}' removed from the stack.")
+### Aim:
 
-    def view_stack(self):
-        if self.is_empty():
-            print("The stack is empty.")
-        else:
-            print("Current stack of plates:")
-            for plate in reversed(self.stack):
-                print(plate)
+Write a negamax algorithm to find the optimal value of Player from the graph.
 
-def plate_stack_game():
-    plate_stack = PlateStack()
-    print("Welcome to the Plate Stack Game!")
+### Steps:
 
-    while True:
-        print("\nChoose an option:")
-        print("1. Add a plate")
-        print("2. Remove a plate")
-        print("3. View stack")
-        print("4. Exit")
+1.Start the program
 
-        choice = input("Enter your choice: ")
+2.Define the minimax function
 
-        if choice == '1':
-            plate = input("Enter the name of the plate to add: ")
-            plate_stack.push(plate)
-        elif choice == '2':
-            plate_stack.pop()
-        elif choice == '3':
-            plate_stack.view_stack()
-        elif choice == '4':
-            print("Exiting the game. Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please try again.")
+3.If maximum depth is reached then return the score value of leaf node. [depth taken as 3]
 
-if __name__ == "__main__":
-    plate_stack_game()
+4.In Max player turn, assign the  maximum value by calling the negamax function recursively.
+
+5.In Min player turn, finding the maximum value by taking the negation of its children.
+
+6.Specify the score value of leaf nodes and Call the negamax function.
+
+7.Print the best value of Max player.
+
+8.Stop the program.
+
+## Program:
+
+```py
+import math
+
+def negamax(curDepth, nodeIndex, scores, targetDepth):
+    # Base case: target depth reached
+    if curDepth == targetDepth:
+        return scores[nodeIndex]
+
+    # Negamax assumes max turn is represented by positive values
+    value1 = negamax(curDepth + 1, nodeIndex * 2, scores, targetDepth)
+    value2 = negamax(curDepth + 1, nodeIndex * 2 + 1, scores, targetDepth)
+
+    return max(-value1, -value2)  # Flip the sign for the other player's turn
+
+# Driver code
+scores = [3, 5, 2, 9, 12, 5, 23, 20]
+treeDepth = math.log(len(scores), 2)  # Calculate depth of node, log(8, base 2) = 3
+print("The optimal value is: ", end="")
+print(negamax(0, 0, scores, int(treeDepth)))
 ```
 
-### Output:
-![Screenshot 2024-08-11 133752](https://github.com/user-attachments/assets/4023310e-4b1c-4247-b0e7-38441363b177)
+## Output:
+
+
+![image](https://github.com/user-attachments/assets/7513a519-9c1c-4276-b24f-c6cdc69c190f)
 
 
 
-### Result:
-Thus the simple Stack plate game was implemented using data structure Stack.
+## Result:
+
+
+Thus the best score of max player was found using negamax algorithm.
